@@ -1,11 +1,30 @@
-from flask import Flask,render_template
-app=Flask(__name__)
-@app.route('/hello/')
-@app.route('/hello/<username>')
-def hello(username=None):
-    return render_template("hello.html",username=username)
+from flask import Flask, request, redirect, url_for, flash, jsonify
+import numpy as np
+import pickle as p
+import pandas as pd
+import json
 
-@app.route('/predict')
-def predict():
-    a=None+0
-    return "Prediction: 0"
+
+app = Flask(__name__)
+
+modelfile = 'models/final_prediction.pickle'    
+
+model = p.load(open(modelfile, 'rb'))
+
+@app.route('/')
+def main():
+    return ('Predict Wine API')
+    
+@app.route('/api/', methods=['POST'])
+def makecalc():
+	j_data = request.get_json()
+
+	prediction = np.array2string(model.predict(j_data))
+	
+	return jsonify(prediction)
+
+
+if __name__ == '__main__':
+
+    
+    app.run(debug=True,host='0.0.0.0')
