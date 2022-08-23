@@ -7,7 +7,7 @@ import json
 
 app = Flask(__name__)
 
-modelfile = 'models/final_prediction.pickle'    
+modelfile = 'final_prediction(1).pickle'    
 
 model = p.load(open(modelfile, 'rb'))
 
