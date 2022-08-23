@@ -13,7 +13,7 @@ model = p.load(open(modelfile, 'rb'))
 
 @app.route('/')
 def main():
-    return ('Predict Wine API')
+    return ('Predict car price API')
     
 @app.route('/api/', methods=['POST'])
 def makecalc():
